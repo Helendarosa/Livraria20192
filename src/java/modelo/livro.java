@@ -6,10 +6,16 @@
 package modelo;
 
 import java.io.Serializable;
+import java.util.Date;
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.Temporal;
 
 /**
  *
@@ -21,8 +27,27 @@ public class livro implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    
     private Long id;
-
+    private String nome;
+    @Temporal(javax.persistence.TemporalType.DATE)
+    private Date data;
+    private Integer paginas;
+    @Lob
+    private String sinopse;
+    private String isbn;
+    private String idioma;
+    private String foto1;
+    private String foto2;
+    private String foto3;
+    
+    @ManyToOne
+    private genero genero;
+    @ManyToOne
+    private editora editora;
+    @ManyToMany
+    private List<autor> autores;
+    
     public Long getId() {
         return id;
     }
@@ -31,29 +56,77 @@ public class livro implements Serializable {
         this.id = id;
     }
 
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
-        return hash;
+    public String getNome() {
+        return nome;
     }
 
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof livro)) {
-            return false;
-        }
-        livro other = (livro) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
-    @Override
-    public String toString() {
-        return "modelo.livro[ id=" + id + " ]";
+    public Date getData() {
+        return data;
     }
+
+    public void setData(Date data) {
+        this.data = data;
+    }
+
+    public Integer getPaginas() {
+        return paginas;
+    }
+
+    public void setPaginas(Integer paginas) {
+        this.paginas = paginas;
+    }
+
+    public String getSinopse() {
+        return sinopse;
+    }
+
+    public void setSinopse(String sinopse) {
+        this.sinopse = sinopse;
+    }
+
+    public String getIsbn() {
+        return isbn;
+    }
+
+    public void setIsbn(String isbn) {
+        this.isbn = isbn;
+    }
+
+    public String getIdioma() {
+        return idioma;
+    }
+
+    public void setIdioma(String idioma) {
+        this.idioma = idioma;
+    }
+
+    public String getFoto1() {
+        return foto1;
+    }
+
+    public void setFoto1(String foto1) {
+        this.foto1 = foto1;
+    }
+
+    public String getFoto2() {
+        return foto2;
+    }
+
+    public void setFoto2(String foto2) {
+        this.foto2 = foto2;
+    }
+
+    public String getFoto3() {
+        return foto3;
+    }
+
+    public void setFoto3(String foto3) {
+        this.foto3 = foto3;
+    }
+    
     
 }
